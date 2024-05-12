@@ -10,9 +10,6 @@ def formatted_name(first_name, last_name, middle_name=''):
 
 
 class TestFormattedName(unittest.TestCase):
-    def setUp(self):
-        self.formatted_name = formatted_name('', '')
-
     def test_full_name_formatted_name(self):
         self.assertEqual(formatted_name('john', 'doe'), 'John Doe')
 
@@ -21,6 +18,9 @@ class TestFormattedName(unittest.TestCase):
 
     def test_only_first_name(self):
         with self.assertRaises(TypeError):
-            self.formatted_name('john')
+            formatted_name('john')
 
+    def test_check_wrong_types(self):
+        with self.assertRaises(TypeError):
+            formatted_name(12, 12.3)
 

@@ -26,12 +26,7 @@ class TestFibonacci(unittest.TestCase):
         self.fibonacci = Fibonacci()
 
     def test_fibonacci_numbers(self):
-        self.assertEqual(self.fibonacci(0), 0)
         self.assertEqual(self.fibonacci(1), 1)
-        self.assertEqual(self.fibonacci(2), 1)
-        self.assertEqual(self.fibonacci(3), 2)
-        self.assertEqual(self.fibonacci(4), 3)
-        self.assertEqual(self.fibonacci(5), 5)
 
     def test_negative_input(self):
         with self.assertRaises(ValueError):
@@ -40,5 +35,24 @@ class TestFibonacci(unittest.TestCase):
     def test_non_integer_input(self):
         with self.assertRaises(ValueError):
             self.fibonacci(3.14)
+
+    def test_empty_value(self):
+        with self.assertRaises(TypeError):
+            self.fibonacci()
+    def test_big_value(self):
+        with self.assertRaises(RecursionError):
+            self.fibonacci(500000)
+    def test_non_string_value(self):
+        with self.assertRaises(ValueError):
+            self.fibonacci('asde')
+
+    def test_check_cache(self):
+        self.fibonacci(5)
+        self.assertEqual(self.fibonacci.cache, [0, 1, 1, 2, 3, 5])
+
+        self.fibonacci(7)
+        self.assertEqual(self.fibonacci.cache, [0, 1, 1, 2, 3, 5, 8, 13])
+
+
 
 
